@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <style>
+        /* Adicionando box-sizing para todos os elementos */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        div {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 40px 5%;
+            border-radius: 15px;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            border: 5px solid transparent;
+            border-radius: 15px;
+            animation: borderColorChange 5s infinite linear;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: dodgerblue;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: deepskyblue;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        progress {
+            width: 100%;
+            margin-top: 20px;
+            height: 20px;
+        }
+
+        /* Animação para as bordas trocando de cor */
+        @keyframes borderColorChange {
+            0% {
+                border-color: blue;
+            }
+            20% {
+                border-color: red;
+            }
+            40% {
+                border-color: purple;
+            }
+            60% {
+                border-color: green;
+            }
+            80% {
+                border-color: pink;
+            }
+            100% {
+                border-color: blue;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Login</h1>
+        <form id="loginForm">
+            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Enviar</button>
+            <p class="error" id="errorMessage">Usuário ou senha incorretos.</p>
+        </form>
+    </div>
+
+    <!-- Barra de progresso -->
+    <progress id="progressBar" value="0" max="100"></progress>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const progressBar = document.getElementById('progressBar');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const username = form.username.value.trim();
+            const password = form.password.value.trim();
+
+            // Simulação de validação
+            if (username === "admin" && password === "1234") {
+                errorMessage.style.display = "none";
+
+                // Iniciar a barra de progresso com incrementos de 10%
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 10;
+                    progressBar.value = progress;
+
+                    if (progress === 100) {
+                        clearInterval(interval);
+                        // Redirecionar para o site
+                        window.location.href = "https://sites.google.com/view/pagina9999"; // Aqui, você pode colocar seu link de destino.
+                    }
+                }, 500); // A cada 500ms, o progresso aumenta 10%
+            } else {
+                errorMessage.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
